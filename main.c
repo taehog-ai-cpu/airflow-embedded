@@ -229,6 +229,7 @@ void timer0_init(void)
 
     TIMSK |= (1<<OCIE0);
 }
+
 ISR(TIMER0_COMP_vect)
 {
     static uint16_t cnt = 0;
@@ -241,6 +242,7 @@ ISR(TIMER0_COMP_vect)
         sec_flag = 1;
     }
 }
+
 /**************** TIMER ****************/
 void timer_task(void)
 {
@@ -368,10 +370,10 @@ void ui_task(void)
 
     snprintf(line2,
              sizeof(line2),
-             "%02u:%02u A%03u",
+             "TIME:%02u:%02u RUN:%u",
              min,
              sec,
-             servo_angle);
+             timer_running);
 
     if(strcmp(line1, prev1))
     {
